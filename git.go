@@ -16,7 +16,7 @@ func GitBranch(repo string) string {
 
   out, err := cmd.StdoutPipe()
   if err != nil {
-    fmt.Fprintf(os.Stderr, "Error creating output pipe for '%v': %v\n", cmdString, err)
+    fmt.Fprintf(os.Stderr, "%v: Error creating output pipe for '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
   }
 
@@ -31,13 +31,13 @@ func GitBranch(repo string) string {
 
   err = cmd.Start()
   if err != nil {
-    fmt.Fprintf(os.Stderr, "Error starting '%v': %v\n", cmdString, err)
+    fmt.Fprintf(os.Stderr, "%v: Error starting '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
   }
 
   err = cmd.Wait()
   if err != nil {
-    fmt.Fprintf(os.Stderr, "Error waiting for '%v': %v\n", cmdString, err)
+    fmt.Fprintf(os.Stderr, "%v: Error waiting for '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
   }
 
@@ -52,7 +52,7 @@ func GitStatus(repo string) string {
 
   out, err := cmd.StdoutPipe()
   if err != nil {
-    fmt.Fprintf(os.Stderr, "Error creating output pipe for '%v': %v\n", cmdString, err)
+    fmt.Fprintf(os.Stderr, "%v: Error creating output pipe for '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
   }
 
@@ -70,13 +70,13 @@ func GitStatus(repo string) string {
 
   err = cmd.Start()
   if err != nil {
-    fmt.Fprintf(os.Stderr, "Error starting '%v': %v\n", cmdString, err)
+    fmt.Fprintf(os.Stderr, "%v: Error starting '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
   }
 
   err = cmd.Wait()
   if err != nil {
-    fmt.Fprintf(os.Stderr, "Error waiting for '%v': %v\n", cmdString, err)
+    fmt.Fprintf(os.Stderr, "%v: Error waiting for '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
   }
 
