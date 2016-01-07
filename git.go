@@ -23,16 +23,15 @@ func GitBranch(repo string) string {
   branch := "unknown branch"
 
   scanner := bufio.NewScanner(out)
-  go func() {
-    for scanner.Scan() {
-      branch = scanner.Text()
-    }
-  }()
 
   err = cmd.Start()
   if err != nil {
     fmt.Fprintf(os.Stderr, "%v: Error starting '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
+  }
+
+  for scanner.Scan() {
+    branch = scanner.Text()
   }
 
   err = cmd.Wait()
@@ -59,19 +58,18 @@ func GitStatus(repo string) string {
   status := "unknown status"
 
   scanner := bufio.NewScanner(out)
-  go func() {
-    for scanner.Scan() {
-      line := scanner.Text()
-      if !strings.HasPrefix(line, "#") {
-        status = line
-      }
-    }
-  }()
 
   err = cmd.Start()
   if err != nil {
     fmt.Fprintf(os.Stderr, "%v: Error starting '%v': %v\n", repo, cmdString, err)
     os.Exit(1)
+  }
+
+  for scanner.Scan() {
+    line := scanner.Text()
+    if !strings.HasPrefix(line, "#") {
+      status = line
+    }
   }
 
   err = cmd.Wait()
